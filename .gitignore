@@ -1,0 +1,8 @@
+logs/
+target/
+project/project/
+tmp/
+.history
+dist/
+.idea/
+.idea_modules/
