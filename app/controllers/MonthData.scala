@@ -10,6 +10,9 @@ class MonthData(year: Int, month: Int) {
 
   def day(weekIndex: Int, dayIndex: Int): Int = firstDay.plusWeeks(weekIndex - 1).plusDays(dayIndex - 1).getDayOfMonth
 
+  def thisMonth(weekIndex: Int, dayIndex: Int): Boolean =
+    firstDay.plusWeeks(weekIndex - 1).plusDays(dayIndex - 1).getMonthOfYear == month
+
   private def monthName: String = new LocalDateTime(year, month, 1, 0, 0).monthOfYear().getAsText
 
   private def firstWeekOfMonth: LocalDateTime = {
@@ -18,8 +21,10 @@ class MonthData(year: Int, month: Int) {
 }
 
 object MonthData {
-  def apply() = {
+  def apply(year: Int, month: Int): MonthData = new MonthData(year, month)
+
+  def apply(): MonthData = {
     val now = new LocalDateTime()
-    new MonthData(now.getYear, now.getMonthOfYear)
+    MonthData(now.getYear, now.getMonthOfYear)
   }
 }
