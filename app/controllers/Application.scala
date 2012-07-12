@@ -8,6 +8,6 @@ object Application extends Controller {
   }
 
   def calendar = Action {
-    Ok(views.html.calendar())
+    Ok(views.html.calendar(MonthData()))
   }
 }
