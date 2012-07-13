@@ -2,14 +2,14 @@
 
 @buttonClass(thisMonth: Boolean) = {@if(thisMonth) {btn-primary} else {btn-info}}
 
-@main(month.name){
+@main(month.name + " " + month.year){
 <div class="container">
     <div class="row">
         <div class="span12">
             <table class="table table-bordered table-striped calendar">
                 <thead>
                 <tr>
-                    <th colspan="8">@month.name</th>
+                    <th colspan="8">@month.name @month.year</th>
                 </tr>
                 <tr>
                     <th>Week</th>

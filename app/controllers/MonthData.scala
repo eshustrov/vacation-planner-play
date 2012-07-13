@@ -2,7 +2,7 @@ package controllers
 
 import org.joda.time.{LocalDateTime, DateTimeConstants}
 
-class MonthData(year: Int, month: Int) {
+class MonthData(val year: Int, month: Int) {
   val name = monthName
   private val firstDay = firstWeekOfMonth
 
