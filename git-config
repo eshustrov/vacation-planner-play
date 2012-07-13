@@ -1,0 +1,1 @@
+git config --global filter.idea-workspace.smudge '[ -f .idea/workspace.xml ] && cat || tee .idea/workspace.xml'
