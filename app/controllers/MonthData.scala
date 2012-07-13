@@ -21,7 +21,11 @@ class MonthData(val year: Int, val month: Int) {
 
   def prev: Int = monthStart.minusMonths(1).getMonthOfYear
 
+  def prevMonthYear: Int = monthStart.minusMonths(1).getYear
+
   def next: Int = monthStart.plusMonths(1).getMonthOfYear
+
+  def nextMonthYear: Int = monthStart.plusMonths(1).getYear
 }
 
 object MonthData {
