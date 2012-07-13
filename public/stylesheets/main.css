@@ -2,3 +2,7 @@ table.calendar th,
 table.calendar td {
     text-align: center;
 }
+
+.center {
+    text-align: center;
+}
