@@ -3,8 +3,8 @@ package controllers
 import org.joda.time.{LocalDateTime, DateTimeConstants}
 
 class MonthData(val year: Int, month: Int) {
-  val name = monthName
-  private val firstDay = firstWeekOfMonth
+  val name = new LocalDateTime(year, month, 1, 0, 0).monthOfYear().getAsText
+  private val firstDay = new LocalDateTime(year, month, 1, 0, 0).withDayOfWeek(DateTimeConstants.MONDAY)
 
   def week(index: Int): Int = firstDay.plusWeeks(index - 1).getWeekOfWeekyear
 
@@ -12,12 +12,6 @@ class MonthData(val year: Int, month: Int) {
 
   def thisMonth(weekIndex: Int, dayIndex: Int): Boolean =
     firstDay.plusWeeks(weekIndex - 1).plusDays(dayIndex - 1).getMonthOfYear == month
-
-  private def monthName: String = new LocalDateTime(year, month, 1, 0, 0).monthOfYear().getAsText
-
-  private def firstWeekOfMonth: LocalDateTime = {
-    new LocalDateTime(year, month, 1, 0, 0).withDayOfWeek(DateTimeConstants.MONDAY)
-  }
 }
 
 object MonthData {
