@@ -1,8 +1,8 @@
-@(month: MonthData)
+@(month: MonthBlock)
 
 @buttonClass(thisMonth: Boolean) = {@if(thisMonth) {btn-primary} else {btn-info}}
 
-@main(month.name + " " + month.year){
+@main(month.name + " " + month.year) {
 <div class="container">
     <div class="row">
         <div class="span1 center">
@@ -67,7 +67,7 @@
                     <td><a class="btn btn-primary" href="">@month.day(4,6)</a></td>
                     <td><a class="btn btn-primary" href="">@month.day(4,7)</a></td>
                 </tr>
-                @if(month.thisMonth(5,1)){
+                @if(month.thisMonth(5,1)) {
                 <tr>
                     <td><a class="btn" href="">@month.week(5)</a></td>
                     <td><a class="btn @buttonClass(month.thisMonth(5,1))" href="">@month.day(5,1)</a></td>
@@ -79,7 +79,7 @@
                     <td><a class="btn @buttonClass(month.thisMonth(5,7))" href="">@month.day(5,7)</a></td>
                 </tr>
                 }
-                @if(month.thisMonth(6,1)){
+                @if(month.thisMonth(6,1)) {
                 <tr>
                     <td><a class="btn" href="">@month.week(6)</a></td>
                     <td><a class="btn @buttonClass(month.thisMonth(6,1))" href="">@month.day(6,1)</a></td>

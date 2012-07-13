@@ -2,18 +2,18 @@ package controllers
 
 import org.joda.time.{LocalDateTime, DateTimeConstants}
 
-class MonthData(val year: Int, val month: Int) {
+class MonthBlock(val year: Int, val month: Int) {
   private val monthStart = new LocalDateTime(year, month, 1, 0, 0)
-  private val firstDay = monthStart.withDayOfWeek(DateTimeConstants.MONDAY)
+  private val blockStart = monthStart.withDayOfWeek(DateTimeConstants.MONDAY)
 
   val name = monthStart.monthOfYear().getAsText
 
-  def week(index: Int): Int = firstDay.plusWeeks(index - 1).getWeekOfWeekyear
+  def week(index: Int): Int = blockStart.plusWeeks(index - 1).getWeekOfWeekyear
 
-  def day(weekIndex: Int, dayIndex: Int): Int = firstDay.plusWeeks(weekIndex - 1).plusDays(dayIndex - 1).getDayOfMonth
+  def day(weekIndex: Int, dayIndex: Int): Int = blockStart.plusWeeks(weekIndex - 1).plusDays(dayIndex - 1).getDayOfMonth
 
   def thisMonth(weekIndex: Int, dayIndex: Int): Boolean =
-    firstDay.plusWeeks(weekIndex - 1).plusDays(dayIndex - 1).getMonthOfYear == month
+    blockStart.plusWeeks(weekIndex - 1).plusDays(dayIndex - 1).getMonthOfYear == month
 
   def prevYear: Int = monthStart.minusYears(1).getYear
 
@@ -28,11 +28,11 @@ class MonthData(val year: Int, val month: Int) {
   def nextMonthYear: Int = monthStart.plusMonths(1).getYear
 }
 
-object MonthData {
-  def apply(year: Int, month: Int): MonthData = new MonthData(year, month)
+object MonthBlock {
+  def apply(year: Int, month: Int): MonthBlock = new MonthBlock(year, month)
 
-  def apply(): MonthData = {
+  def apply(): MonthBlock = {
     val now = new LocalDateTime()
-    MonthData(now.getYear, now.getMonthOfYear)
+    MonthBlock(now.getYear, now.getMonthOfYear)
   }
 }

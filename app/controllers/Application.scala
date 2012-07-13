@@ -8,11 +8,11 @@ object Application extends Controller {
   }
 
   def calendarCurrent = Action {
-    val monthData = MonthData()
-    Redirect(routes.Application.calendar(monthData.year, monthData.month))
+    val monthBlock = MonthBlock()
+    Redirect(routes.Application.calendar(monthBlock.year, monthBlock.month))
   }
 
   def calendar(year: Int, month: Int) = Action {
-    Ok(views.html.calendar(MonthData(year, month)))
+    Ok(views.html.calendar(MonthBlock(year, month)))
   }
 }
