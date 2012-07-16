@@ -1,13 +1,13 @@
-@(month: MonthBlock)
+@(month: Month)
 
-@buttonClass(thisMonth: Boolean) = {@if(thisMonth) {btn-primary} else {btn-info}}
+@buttonClass(isThisMonth: Boolean) = {@if(isThisMonth) {btn-primary} else {btn-info}}
 
 @main(month.name + " " + month.year) {
 <div class="container">
     <div class="row">
         <div class="span1 center">
             <div><a class="btn" href="../@month.prevMonthYear/@month.prev"><i class="icon-step-backward"></i></a></div>
-            <div><a class="btn" href="../@month.prevYear/@month.month"><i class="icon-fast-backward"></i></a></div>
+            <div><a class="btn" href="../@month.prevYear/@month.number"><i class="icon-fast-backward"></i></a></div>
         </div>
         <div class="span10">
             <table class="table table-bordered table-striped calendar">
@@ -17,78 +17,20 @@
                 </tr>
                 <tr>
                     <th>Week</th>
-                    <th>Mon</th>
-                    <th>Tue</th>
-                    <th>Wed</th>
-                    <th>Thu</th>
-                    <th>Fri</th>
-                    <th>Sat</th>
-                    <th>Sun</th>
+                    @Seq("Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun").map {dayName =>
+                    <th>@dayName</th>
+                    }
                 </tr>
                 </thead>
                 <tbody>
+                @month.weeks.map {week =>
                 <tr>
-                    <td><a class="btn" href="">@month.week(1)</a></td>
-                    <td><a class="btn @buttonClass(month.thisMonth(1,1))" href="">@month.day(1,1)</a></td>
-                    <td><a class="btn @buttonClass(month.thisMonth(1,2))" href="">@month.day(1,2)</a></td>
-                    <td><a class="btn @buttonClass(month.thisMonth(1,3))" href="">@month.day(1,3)</a></td>
-                    <td><a class="btn @buttonClass(month.thisMonth(1,4))" href="">@month.day(1,4)</a></td>
-                    <td><a class="btn @buttonClass(month.thisMonth(1,5))" href="">@month.day(1,5)</a></td>
-                    <td><a class="btn @buttonClass(month.thisMonth(1,6))" href="">@month.day(1,6)</a></td>
-                    <td><a class="btn @buttonClass(month.thisMonth(1,7))" href="">@month.day(1,7)</a></td>
-                </tr>
-                <tr>
-                    <td><a class="btn" href="">@month.week(2)</a></td>
-                    <td><a class="btn btn-primary" href="">@month.day(2,1)</a></td>
-                    <td><a class="btn btn-primary" href="">@month.day(2,2)</a></td>
-                    <td><a class="btn btn-primary" href="">@month.day(2,3)</a></td>
-                    <td><a class="btn btn-primary" href="">@month.day(2,4)</a></td>
-                    <td><a class="btn btn-primary" href="">@month.day(2,5)</a></td>
-                    <td><a class="btn btn-primary" href="">@month.day(2,6)</a></td>
-                    <td><a class="btn btn-primary" href="">@month.day(2,7)</a></td>
-                </tr>
-                <tr>
-                    <td><a class="btn" href="">@month.week(3)</a></td>
-                    <td><a class="btn btn-primary" href="">@month.day(3,1)</a></td>
-                    <td><a class="btn btn-primary" href="">@month.day(3,2)</a></td>
-                    <td><a class="btn btn-primary" href="">@month.day(3,3)</a></td>
-                    <td><a class="btn btn-primary" href="">@month.day(3,4)</a></td>
-                    <td><a class="btn btn-primary" href="">@month.day(3,5)</a></td>
-                    <td><a class="btn btn-primary" href="">@month.day(3,6)</a></td>
-                    <td><a class="btn btn-primary" href="">@month.day(3,7)</a></td>
-                </tr>
-                <tr>
-                    <td><a class="btn" href="">@month.week(4)</a></td>
-                    <td><a class="btn btn-primary" href="">@month.day(4,1)</a></td>
-                    <td><a class="btn btn-primary" href="">@month.day(4,2)</a></td>
-                    <td><a class="btn btn-primary" href="">@month.day(4,3)</a></td>
-                    <td><a class="btn btn-primary" href="">@month.day(4,4)</a></td>
-                    <td><a class="btn btn-primary" href="">@month.day(4,5)</a></td>
-                    <td><a class="btn btn-primary" href="">@month.day(4,6)</a></td>
-                    <td><a class="btn btn-primary" href="">@month.day(4,7)</a></td>
-                </tr>
-                @if(month.thisMonth(5,1)) {
-                <tr>
-                    <td><a class="btn" href="">@month.week(5)</a></td>
-                    <td><a class="btn @buttonClass(month.thisMonth(5,1))" href="">@month.day(5,1)</a></td>
-                    <td><a class="btn @buttonClass(month.thisMonth(5,2))" href="">@month.day(5,2)</a></td>
-                    <td><a class="btn @buttonClass(month.thisMonth(5,3))" href="">@month.day(5,3)</a></td>
-                    <td><a class="btn @buttonClass(month.thisMonth(5,4))" href="">@month.day(5,4)</a></td>
-                    <td><a class="btn @buttonClass(month.thisMonth(5,5))" href="">@month.day(5,5)</a></td>
-                    <td><a class="btn @buttonClass(month.thisMonth(5,6))" href="">@month.day(5,6)</a></td>
-                    <td><a class="btn @buttonClass(month.thisMonth(5,7))" href="">@month.day(5,7)</a></td>
-                </tr>
-                }
-                @if(month.thisMonth(6,1)) {
-                <tr>
-                    <td><a class="btn" href="">@month.week(6)</a></td>
-                    <td><a class="btn @buttonClass(month.thisMonth(6,1))" href="">@month.day(6,1)</a></td>
-                    <td><a class="btn @buttonClass(month.thisMonth(6,2))" href="">@month.day(6,2)</a></td>
-                    <td><a class="btn @buttonClass(month.thisMonth(6,3))" href="">@month.day(6,3)</a></td>
-                    <td><a class="btn @buttonClass(month.thisMonth(6,4))" href="">@month.day(6,4)</a></td>
-                    <td><a class="btn @buttonClass(month.thisMonth(6,5))" href="">@month.day(6,5)</a></td>
-                    <td><a class="btn @buttonClass(month.thisMonth(6,6))" href="">@month.day(6,6)</a></td>
-                    <td><a class="btn @buttonClass(month.thisMonth(6,7))" href="">@month.day(6,7)</a></td>
+                    <td><a class="btn" href="">@week.number</a></td>
+                    @for(weekDay <- 1 to 7) {
+                    <td>
+                        <a class="btn @buttonClass(week.isThisMonthDay(weekDay))" href="">@week.monthDay(weekDay)</a>
+                    </td>
+                    }
                 </tr>
                 }
                 </tbody>
@@ -96,7 +38,7 @@
         </div>
         <div class="span1 center">
             <div><a class="btn" href="../@month.nextMonthYear/@month.next"><i class="icon-step-forward"></i></a></div>
-            <div><a class="btn" href="../@month.nextYear/@month.month"><i class="icon-fast-forward"></i></a></div>
+            <div><a class="btn" href="../@month.nextYear/@month.number"><i class="icon-fast-forward"></i></a></div>
         </div>
     </div>
 </div>
