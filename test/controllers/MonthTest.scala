@@ -68,4 +68,70 @@ class MonthTest extends Specification {
       }
     }
   }
+
+  "first Month Week" should {
+    "contain at least one day of the Month" in {
+      foreach(Seq((2000, 1), (2012, 7), (2100, 12))) {
+        case (year, month) => {
+          val week = Month(year, month).weeks.next()
+          (1 to 7) count (week.isThisMonthDay(_)) must be greaterThan 0
+        }
+      }
+    }
+    "contain correct month days" in {
+      foreach(Seq(
+        (2000, 1) -> Vector(27, 28, 29, 30, 31, 1, 2),
+        (2012, 7) -> Vector(25, 26, 27, 28, 29, 30, 1),
+        (2100, 12) -> Vector(29, 30, 1, 2, 3, 4, 5))) {
+        case ((year, month), days) => {
+          val week = Month(year, month).weeks.next()
+          (1 to 7) map (week.monthDay(_)) must be equalTo days
+        }
+      }
+    }
+  }
+
+  "middle Month Week" should {
+    "contain just days of the Month" in {
+      foreach(Seq((2000, 1, 2), (2012, 7, 3), (2100, 12, 4))) {
+        case (year, month, weekInMonth) => {
+          val week = Month(year, month).weeks.drop(weekInMonth - 1).next()
+          (1 to 7) count (week.isThisMonthDay(_)) must be equalTo 7
+        }
+      }
+    }
+    "contain correct month days" in {
+      foreach(Seq(
+        (2000, 1, 2) -> (3 to 9),
+        (2012, 7, 3) -> (9 to 15),
+        (2100, 12, 4) -> (20 to 26))) {
+        case ((year, month, weekInMonth), days) => {
+          val week = Month(year, month).weeks.drop(weekInMonth - 1).next()
+          (1 to 7) map (week.monthDay(_)) must be equalTo days
+        }
+      }
+    }
+  }
+
+  "last Month Week" should {
+    "contain at least one day of the Month" in {
+      foreach(Seq((2000, 1), (2012, 7), (2100, 12))) {
+        case (year, month) => {
+          val week = Month(year, month).weeks.toSeq.last
+          (1 to 7) count (week.isThisMonthDay(_)) must be greaterThan 0
+        }
+      }
+    }
+    "contain correct month days" in {
+      foreach(Seq(
+        (2000, 1) -> Vector(31, 1, 2, 3, 4, 5, 6),
+        (2012, 7) -> Vector(30, 31, 1, 2, 3, 4, 5),
+        (2100, 12) -> Vector(27, 28, 29, 30, 31, 1, 2))) {
+        case ((year, month), days) => {
+          val week = Month(year, month).weeks.toSeq.last
+          (1 to 7) map (week.monthDay(_)) must be equalTo days
+        }
+      }
+    }
+  }
 }
