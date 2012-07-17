@@ -101,10 +101,7 @@ class MonthTest extends Specification {
       }
     }
     "contain correct month days" in {
-      foreach(Seq(
-        (2000, 1, 2) -> (3 to 9),
-        (2012, 7, 3) -> (9 to 15),
-        (2100, 12, 4) -> (20 to 26))) {
+      foreach(Seq((2000, 1, 2) -> (3 to 9), (2012, 7, 3) -> (9 to 15), (2100, 12, 4) -> (20 to 26))) {
         case ((year, month, weekInMonth), days) => {
           val week = Month(year, month).weeks.drop(weekInMonth - 1).next()
           (1 to 7) map (week.monthDay(_)) must be equalTo days
